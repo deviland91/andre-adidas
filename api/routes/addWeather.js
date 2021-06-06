@@ -5,7 +5,11 @@ const admin = require('firebase-admin');
 const db = admin.firestore();
 
 const newWeather = async (city, country, daily) => {
-  console.log(`city: ${city}, country: ${country}, daily: ${daily}`)
+  if (!city || city.length === 0) {
+    return { result: "error", message: "City cannot be empty" }
+  } else if (!country || country.length === 0) {
+    return { result: "error", message: "Country cannot be empty" }
+  }
   const cityRef = db.collection("cities").where("city", "==", city).where("country", "==", country)
 
   const getCity = await cityRef.get()
@@ -48,7 +52,7 @@ router.post("/", async (req, res, next) => {
   try {
     changeResult = await newWeather(city, country, daily)
     if (changeResult.result == "error") {
-      res.statusCode = 404;
+      res.statusCode = 500;
       res.send(JSON.stringify(changeResult))
     } else {
       res.statusCode = 200;

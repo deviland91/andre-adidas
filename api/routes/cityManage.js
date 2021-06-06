@@ -5,6 +5,11 @@ const admin = require('firebase-admin');
 const db = admin.firestore();
 
 const addCity = async (city, country, usage) => {
+  if (!city || city.length === 0) {
+    return { result: "error", message: "City cannot be empty" }
+  } else if (!country || country.length === 0) {
+    return { result: "error", message: "Country cannot be empty" }
+  }
 
   if (usage == "delete") {
     const docRef = await db.collection('cities').where("city", "==", city).where("country", "==", country).get()
@@ -37,10 +42,11 @@ const addCity = async (city, country, usage) => {
 }
 
 router.post("/", async (req, res, next) => {
+
   const { city, country, usage } = req.query
   const changeResult = await addCity(city, country, usage)
   if (changeResult.result == "error") {
-    res.statusCode = 404;
+    res.statusCode = 500;
     res.send(JSON.stringify(changeResult))
   } else {
     res.statusCode = 200;

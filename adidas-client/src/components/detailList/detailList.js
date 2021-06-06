@@ -41,7 +41,10 @@ const DetailList = ({ weather, day }) => {
               </Grid>
               <Grid item xs={12} >
                 <Typography variant="caption" >
-                  Rain Prob: {forecast.precipProb}%
+                  Rain Prob:
+                </Typography>
+                <Typography component="div" variant="caption" >
+                  {forecast.precipProb}%
                 </Typography>
               </Grid>
             </Grid>

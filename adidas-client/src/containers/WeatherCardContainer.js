@@ -18,6 +18,7 @@ const WeatherCardContainer = ({ city }) => {
   useEffect(() => {
     axios.get(`https://andre-adidas.herokuapp.com/api/getWeather`, { params: city })
       .then(response => {
+        console.log("response: ", response)
         if (response.data.result == "success") {
           setInfo(response.data.weather[0])
         } else {
@@ -28,11 +29,9 @@ const WeatherCardContainer = ({ city }) => {
         toast.error(error)
       })
 
-
   }, [city])
 
   const changeDay = (day) => {
-    console.log("day: ", day)
     setCurrentDay(day)
   }
 
@@ -42,8 +41,8 @@ const WeatherCardContainer = ({ city }) => {
         {
           info?.daily.slice(0, 5).map((forecast) => {
             return (
-              <Grid item xs={3} sm={2}>
-                <WeatherCard forecast={forecast} setDay={changeDay} />
+              <Grid item xs={6} sm={4} md={3} lg={2} >
+                <WeatherCard classname={`${forecast.date == currentDay ? "selected" : ""}`} forecast={forecast} setDay={changeDay} />
               </Grid>
             )
           })

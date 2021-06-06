@@ -1,6 +1,11 @@
 .mainCard {
   width: 140px;
   height: 220px;
+  line-height: 0;
+  
+  &.selected {
+    background-color: floralwhite;
+  }
 
   .cardInner {
     width: 100%;

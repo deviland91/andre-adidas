@@ -38,7 +38,7 @@ const getCity = async () => {
 router.get("/", async (req, res, next) => {
   const getCities = await getCity()
   if (getCities.result == "error") {
-    res.statusCode = 404;
+    res.statusCode = 500;
     res.send(JSON.stringify(getCities))
   } else {
     res.statusCode = 200;

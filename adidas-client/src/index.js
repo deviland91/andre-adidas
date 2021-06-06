@@ -9,7 +9,7 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
     <ToastContainer
-      position="bottom-right"
+      position="bottom-left"
       autoClose={3000}
       hideProgressBar={false}
       newestOnTop={false}

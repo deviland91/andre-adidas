@@ -20,38 +20,38 @@ const App = () => {
       .then(response => {
 
         if (response.data.result == "success") {
-          console.log("response: ", response.data.cities)
           setCities(response.data.cities)
-          console.log("cities: ", cities)
         } else {
           toast.error(response.data.message)
         }
 
       })
       .catch(error => {
-        console.log("error: ", error)
+        toast.error(error)
       })
   }, [searchCity])
 
   return (
     <Grid container className="App" spacing={3}>
-      <Grid item xs={9} sm={6}>
+      <Grid item xs={12} sm={7}>
         <Typography variant="h2" style={{ textAlign: "left" }}>
           All new Weather App
-      </Typography>
+        </Typography>
       </Grid>
 
-      <Grid item xs={3} style={{ textAlign: "left", alignSelf: "center" }}>
+      <Grid item xs={12} sm={5} style={{ textAlign: "left", alignSelf: "center" }}>
         <Autocomplete
           value={searchCity}
           id="combo-box-demo"
           options={cities}
           getOptionLabel={(option) => option.city + ", " + option.country}
-          style={{ width: 300 }}
+          style={{ width: 200 }}
           renderInput={(params) => <TextField {...params} label="City Search" variant="outlined" />}
           onChange={(event, newValue) => {
+            setSearchCity(null)
             setSearchCity(newValue)
           }}
+
         />
       </Grid>
 
