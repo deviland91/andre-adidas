@@ -61,7 +61,7 @@ const dbWeather = async (city, country, type) => {
 router.get("/", async (req, res, next) => {
   const { city, country, type } = req.query
   const weatherData = await dbWeather(city, country, type)
-  console.log("weather: ", weatherData)
+
   if (weatherData.result == "error") {
     res.statusCode = 500;
     res.send(JSON.stringify(weatherData))

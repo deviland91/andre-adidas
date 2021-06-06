@@ -1,10 +1,10 @@
+import { Grid } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { Grid, Typography } from '@material-ui/core';
-import { toast } from "react-toastify"
-
-
-import WeatherCard from '../components/weatherCard/weatherCard';
+import { toast } from "react-toastify";
 import DetailList from '../components/detailList/detailList';
+import WeatherCard from '../components/weatherCard/weatherCard';
+
+
 
 const axios = require("axios")
 
@@ -16,9 +16,9 @@ const WeatherCardContainer = ({ city }) => {
   const [currentDay, setCurrentDay] = useState(null)
 
   useEffect(() => {
+    city.type = "single"
     axios.get(`https://andre-adidas.herokuapp.com/api/getWeather`, { params: city })
       .then(response => {
-        console.log("response: ", response)
         if (response.data.result == "success") {
           setInfo(response.data.weather[0])
         } else {
@@ -29,8 +29,7 @@ const WeatherCardContainer = ({ city }) => {
         toast.error(error)
       })
 
-  }, [city])
-
+  }, [city.city])
   const changeDay = (day) => {
     setCurrentDay(day)
   }
@@ -38,8 +37,7 @@ const WeatherCardContainer = ({ city }) => {
   return (
     <>
       <Grid item container xs={12}>
-        {
-          info?.daily.slice(0, 5).map((forecast) => {
+        {info?.daily.slice(0, 5).map((forecast) => {
             return (
               <Grid item xs={6} sm={4} md={3} lg={2} >
                 <WeatherCard classname={`${forecast.date == currentDay ? "selected" : ""}`} forecast={forecast} setDay={changeDay} />

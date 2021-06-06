@@ -12,7 +12,6 @@ const DetailList = ({ weather, day }) => {
       {weather?.daily.find(findDay => {
         return findDay.date == day
       })?.hourly.slice(0, 12).map((forecast) => {
-        console.log("forecast: ", forecast)
         return (
           <Paper elevation={1} className="detailClass">
             <Grid container spacing={2} style={{ padding: "4px" }}>

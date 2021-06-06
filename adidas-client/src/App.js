@@ -45,10 +45,9 @@ const App = () => {
           id="combo-box-demo"
           options={cities}
           getOptionLabel={(option) => option.city + ", " + option.country}
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           renderInput={(params) => <TextField {...params} label="City Search" variant="outlined" />}
           onChange={(event, newValue) => {
-            setSearchCity(null)
             setSearchCity(newValue)
           }}
 

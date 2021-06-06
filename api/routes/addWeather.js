@@ -21,14 +21,12 @@ const newWeather = async (city, country, daily) => {
     const weatherDoc = await allWeatherData.get()
 
     if (weatherDoc._size > 0) {
-      console.log("Estou a modificar")
       const addDoc = await db.collection('weather').doc(weatherDoc._docs()[0].id).set({
         city: getCity._docs()[0]._ref,
         daily: daily
       })
       return { result: "success", doc: addDoc }
     } else {
-      console.log("Estou a adicionar")
       const addDoc = await db.collection('weather').add({
         city: getCity._docs()[0]._ref,
         daily: daily
