@@ -10,14 +10,13 @@ import WeatherCardContainer from './containers/WeatherCardContainer';
 const axios = require("axios")
 
 
-
 const App = () => {
 
   const [searchCity, setSearchCity] = useState(null)
   const [cities, setCities] = useState([])
 
   useEffect(() => {
-    axios.get(`/api/getCities`)
+    axios.get(`https://andre-adidas.herokuapp.com/api/getCities`)
       .then(response => {
 
         if (response.data.result == "success") {

@@ -16,7 +16,7 @@ const WeatherCardContainer = ({ city }) => {
   const [currentDay, setCurrentDay] = useState(null)
 
   useEffect(() => {
-    axios.get(`/api/getWeather`, { params: city })
+    axios.get(`https://andre-adidas.herokuapp.com/api/getWeather`, { params: city })
       .then(response => {
         if (response.data.result == "success") {
           setInfo(response.data.weather[0])
